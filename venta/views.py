@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Plataforma, Categoria, Inventario
-from .forms import PlataformaForm, CategoriaForm
+from .models import Plataforma, Categoria, Inventario, Coleccion
+from .forms import PlataformaForm, CategoriaForm, ColeccionForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -293,12 +293,14 @@ def actualizar_categoria(request, pk):
 
 
 #listar colecciones
+@login_required
 def mostrar_colecciones(request):
     lista_colecciones = Coleccion.objects.all()
     context={"colecciones":lista_colecciones}
     return render(request,'venta/colecciones/colecciones_list.html',context)
 
 #agregar colecciones
+@login_required
 def agregar_colecciones(request):
     if request.method == "POST":
         form = ColeccionForm(request.POST)
@@ -314,6 +316,7 @@ def agregar_colecciones(request):
         return render(request,'venta/colecciones/colecciones_add.html',context)
 
 #eliminar colecciones
+@login_required
 def borrar_colecciones(request,pk):
     errores = []
     lista_colecciones = Coleccion.objects.all()
@@ -330,6 +333,7 @@ def borrar_colecciones(request,pk):
         return render(request,'venta/colecciones/colecciones_list.html',context)
 
 #modificar colecciones
+@login_required
 def actualizar_colecciones(request, pk):
     try:
         coleccion = Coleccion.objects.get(Id_coleccion=pk)

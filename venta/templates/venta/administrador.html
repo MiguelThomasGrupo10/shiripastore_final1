@@ -51,25 +51,33 @@
         </div>
       </section>
 
-    <section class="container mt-4">
-      <h3 class="mb-3">Bienvenido | {{ user.username }}</h3>
+      <section class="container mt-4">
+        <h3 class="mb-3">Bienvenido | {{ user.username }}</h3>
         <div class="row">
           {% if user.username == "admin" %}
-            <div class="col-md-4 mb-3">
-                <a href="{% url 'crud_plataformas' %}" class="btn btn-primary btn-lg btn-block">Lista de Plataformas</a>
-            </div>
+          <div class="col-md-3 mb-3">
+            <a href="{% url 'crud_plataformas' %}" class="btn btn-primary btn-lg btn-block">Lista de Plataformas</a>
+          </div>
           {% endif %}
-
+      
           {% if user.username == "admin" %}
-            <div class="col-md-4 mb-3">
-                <a href="{% url 'crud_categorias' %}" class="btn btn-primary btn-lg btn-block">Lista de Categorias</a>
-            </div>
+          <div class="col-md-3 mb-3">
+            <a href="{% url 'crud_categorias' %}" class="btn btn-primary btn-lg btn-block">Lista de Categorias</a>
+          </div>
           {% endif %}
-            <div class="col-md-4 mb-3">
-                <a href="{% url 'crud_inventario' %}" class="btn btn-primary btn-lg btn-block">Lista de Inventarios</a>
-            </div>
+      
+          {% if user.username == "admin" %}
+          <div class="col-md-3 mb-3">
+            <a href="{% url 'crud_colecciones' %}" class="btn btn-primary btn-lg btn-block">Lista de Colecciones</a>
+          </div>
+          {% endif %}
+      
+          <div class="col-md-3 mb-3">
+            <a href="{% url 'crud_inventario' %}" class="btn btn-primary btn-lg btn-block">Lista de Inventarios</a>
+          </div>
         </div>
-    </section>
+      </section>
+      
     
 
     <footer class="bg-primary text-white">
