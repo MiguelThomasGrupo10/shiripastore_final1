@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Plataforma, Categoria, Inventario, Coleccion
-from .forms import PlataformaForm, CategoriaForm, ColeccionForm
+from .models import Plataforma, Categoria, Inventario
+from .forms import PlataformaForm, CategoriaForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 TEMPLATE_DIRS = (
@@ -18,28 +19,33 @@ def carrito(request):
     return render(request, "venta/carrito.html")
 
 def contacto(request):
-    return render(request, "venta/login/contacto.html")
+    return render(request, "venta/usuario/contacto.html")
 
 def formRegistro(request):
-    return render(request, "venta/login/formRegistro.html")
+    return render(request, "venta/usuario/formRegistro.html")
 
 def micuenta(request):
-    return render(request, "venta/login/micuenta.html")
+    return render(request, "venta/usuario/micuenta.html")
 
 def tienda(request):
     return render(request, "venta/tienda.html")
 
-# def menu(request):
-#     request.session["usuario"]="mleiva"
-#     lista_inventario = Inventario.objects.all()
-#     lista_categorias = Categoria.objects.all()
-#     lista_plataforma = Plataforma.objects.all()
-#     usuario=request.session["usuario"]
 
-#     context = {"inventario":lista_inventario,"usu":usuario}
-#     return render(request, 'venta/inventario/inventario_list.html',context)
+@login_required
+def administrador(request):
+    request.session["usuario"]="miguel"
+    lista_inventario = Inventario.objects.all()
+    lista_categorias = Categoria.objects.all()
+    lista_plataforma = Plataforma.objects.all()
+    usuario=request.session["usuario"]
+
+    context = {"inventario":lista_inventario,"categoria":lista_categorias,"plataforma":lista_plataforma,"usu":usuario}
+    return render(request, 'venta/administrador.html',context)
+
+
 
 #Listar inventario
+@login_required
 def lista_inventario(request):
     lista_inventario = Inventario.objects.raw("SELECT * FROM venta_inventario")
     lista_categorias = Categoria.objects.all()
@@ -48,6 +54,7 @@ def lista_inventario(request):
     return render(request,'venta/inventario/inventario_list.html',context)
 
 #agregar inventario
+@login_required
 def agregar_inventario(request):
     if request.method != "POST":
         lista_categorias = Categoria.objects.all()
@@ -81,6 +88,7 @@ def agregar_inventario(request):
         return render(request,'venta/inventario/inventario_add.html',context)
 
 #Buscar Inventario (buscar objeto de inventario para modificar.)
+@login_required
 def buscar_inventario(request,pk):
     if pk != "":
         inventario = Inventario.objects.get(Id_juego=pk)
@@ -95,6 +103,7 @@ def buscar_inventario(request,pk):
 
 
 #eliminar inventario
+@login_required
 def borrar_inventario(request,pk):
     
     try:
@@ -113,6 +122,7 @@ def borrar_inventario(request,pk):
 
 
 #modificar inventario
+@login_required
 def actualizar_inventario(request):
     if request.method == "POST":
         #rescatamos en variables los valores del formulario (name)
@@ -150,12 +160,14 @@ def actualizar_inventario(request):
 
 
 #Listar plataformas
+@login_required  
 def mostrar_plataformas(request):
     lista_plataformas = Plataforma.objects.all()
     context={"plataformas":lista_plataformas}
     return render(request,'venta/plataforma/plataforma_list.html',context)
 
 #agregar plataformas
+@login_required  
 def agregar_plataformas(request):
     if request.method == "POST":
         form = PlataformaForm(request.POST)
@@ -171,6 +183,7 @@ def agregar_plataformas(request):
         return render(request,'venta/plataforma/plataforma_add.html',context)
 
 #eliminar plataformas
+@login_required  
 def borrar_plataformas(request,pk):
     errores = []
     lista_plataformas = Plataforma.objects.all()
@@ -187,6 +200,7 @@ def borrar_plataformas(request,pk):
         return render(request,'venta/plataforma/plataforma_list.html',context)
 
 #modificar plataformas
+@login_required  
 def actualizar_plataforma(request, pk):
     try:
         plataforma = Plataforma.objects.get(Id_plataforma=pk)
@@ -212,12 +226,14 @@ def actualizar_plataforma(request, pk):
 
 
 #listar categorias
+@login_required  
 def mostrar_categorias(request):
     lista_categorias = Categoria.objects.all()
     context={"categorias":lista_categorias}
     return render(request,'venta/categoria/categoria_list.html',context)
 
 #agregar categorias
+@login_required  
 def agregar_categorias(request):
     if request.method == "POST":
         form = CategoriaForm(request.POST)
@@ -233,6 +249,7 @@ def agregar_categorias(request):
         return render(request,'venta/categoria/categoria_add.html',context)
 
 #eliminar categorias
+@login_required  
 def borrar_categorias(request,pk):
     errores = []
     lista_categorias = Categoria.objects.all()
@@ -249,6 +266,7 @@ def borrar_categorias(request,pk):
         return render(request,'venta/categoria/categoria_list.html',context)
 
 #modificar categorias
+@login_required  
 def actualizar_categoria(request, pk):
     try:
         categoria = Categoria.objects.get(Id_categoria=pk)

@@ -55,34 +55,37 @@
       <!--CREACIÓN AGREGAR INVENTARIO-->
       <!--CREACIÓN AGREGAR INVENTARIO-->
 
-      <h3>Agregar Inventario</h3>
-      <form action="" method="POST">
+<section class="container">
+    <h3>Agregar Inventario</h3>
+    <form action="" method="POST">
         {% csrf_token %}
         <pre>Nombre del Juego: <input type="text" name="nombre_juego"> </pre>
         <pre>Categoria: <select name="categoria">
-                {% for tmp in categorias %}
-                  <option value="{{tmp.Id_categoria}}">{{tmp.categoria}}</option>
-                {% endfor %}
-              </select>
-              </pre>
+            {% for tmp in categorias %}
+            <option value="{{tmp.Id_categoria}}">{{tmp.categoria}}</option>
+            {% endfor %}
+        </select>
+        </pre>
         <pre>Plataforma: <select name="plataforma">
-                {% for tmp in plataformas %}
-                  <option value="{{tmp.Id_plataforma}}">{{tmp.plataforma}}</option>
-                {% endfor %}
-              </select>
-              </pre>
+            {% for tmp in plataformas %}
+            <option value="{{tmp.Id_plataforma}}">{{tmp.plataforma}}</option>
+            {% endfor %}
+        </select>
+        </pre>
         <pre>Valor: <input type="number" name="valor"> </pre>
         <pre>Stock: <input type="number" name="stock"> </pre>
         <input type="submit" class="btn btn-primary" value="Agregar">
-      </form>
-      <br><br>
-      <div id="idMensajes">
-          {% if mensaje %}
-              {{mensaje}}
-          {% endif %}
-      </div>
-      <br>
-      <a class="btn btn-secondary" href="{% url 'crud_inventario' %}">Volver</a>
+    </form>
+    <br><br>
+    <div id="idMensajes">
+        {% if mensaje %}
+        {{mensaje}}
+        {% endif %}
+    </div>
+    <br>
+    <a class="btn btn-outline-primary" href="{% url 'crud_inventario' %}">Volver</a>
+</section>
+
 
   <footer class="bg-primary text-white">
     <div class="container">
