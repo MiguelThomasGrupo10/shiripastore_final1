@@ -1,0 +1,39 @@
+{
+    "Comentarios":[
+        {   "idComentario": "100",
+            "nombre": "Leo Diario",
+            "edad": "40 años",
+            "fechaResenna": "06/04/2023",
+            "comentario": "Encontré esta pagina web por casualidad, compré una licencia del juego Jedi survivor para mi hijo por sus notas y quedó fascinado",
+            "juegoComprado": "Star Wars Jedi: Survivor"
+        },
+        {   "idComentario": "110",
+            "nombre": "Elsa Brosón",
+            "edad": "24 años",
+            "fechaResenna": "15/04/2023",
+            "comentario": "Justito estaba buscando un juego y me compre el overcooked como trabajo en cocina me llamó la atencion ajajaja",
+            "juegoComprado": "Overcooked 2"
+        },
+        {   "idComentario": "120",
+            "nombre": "Aitor Menta",
+            "edad": "27",
+            "fechaResenna": "21/04/2023",
+            "comentario": "Encontré el Hogwarts Legacy a mitad de precio, nice.... 8)",
+            "juegoComprado": "Hogwarts Legacy"
+        },
+        {   "idComentario": "130",
+            "nombre": "Armando Bronca",
+            "edad": "34",
+            "fechaResenna": "25/04/2023",
+            "comentario": "Me gusta la pagina web tiene mucha variedad de juegos y es confiable, recomendado!",
+            "juegoComprado": "Sekiro: Shadows Die Twice"
+        },
+        {   "idComentario": "140",
+            "nombre": "Ao Gao",
+            "edad": "28",
+            "fechaResenna": "06/05/2023",
+            "comentario": "我喜欢这个网站，它有很多类型的游戏",
+            "juegoComprado": "Red Dead Redemption 2"
+        }
+    ]
+}

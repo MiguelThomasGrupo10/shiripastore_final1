@@ -1,0 +1,54 @@
+{
+    "Empresas":[
+        {   "idEmpresa": "100",
+            "nombre": "Steam",
+            "descripcion": "Plataforma de distribucion digital de videojuegos",
+            "annoColaboracion": "06/03/2023"
+        },
+        {   "idEmpresa": "101",
+            "nombre": "Epic Games",
+            "descripcion": "Empresa desarrolladora de videojuegos",
+            "annoColaboracion": "06/03/2023"
+        },
+        {   "idEmpresa": "102",
+            "nombre": "Ubisoft",
+            "descripcion": "Empresa desarrolladora de videojuegos",
+            "annoColaboracion": "06/03/2023"
+        },
+        {   "idEmpresa": "103",
+            "nombre": "Google",
+            "descripcion": "Empresa especializada en productos y servicios con internet",
+            "annoColaboracion": "06/03/2023"
+        },
+        {
+            "idEmpresa": "104",
+            "nombre": "Microsoft",
+            "descripcion": "Multinacional tecnológica, desarrolla y comercializa una amplia gama de software, hardware y servicios de TI",
+            "annoColaboracion": "06/03/2023"
+        },
+        {
+            "idEmpresa": "105",
+            "nombre": "Riot Games",
+            "descripcion": "desarrolladora y editora de videojuegos",
+            "annoColaboracion": "06/03/2023"
+        },
+        {
+            "idEmpresa": "106",
+            "nombre": "Capcom",
+            "descripcion": "Empresa desarrolladora y distribuidora de videojuegos",
+            "annoColaboracion": "06/03/2023"
+        },
+        {
+            "idEmpresa": "107",
+            "nombre": "Bethesda",
+            "descripcion": "Empresa dedicada a la distribución y desarrollo de videojuegos",
+            "annoColaboracion": "06/03/2023"
+        },
+        {
+            "idEmpresa": "108",
+            "nombre": "Valve",
+            "descripcion": "Empresa privada dedicada al software de videojuegos",
+            "annoColaboracion": "06/03/2023"
+        }
+    ]
+}
