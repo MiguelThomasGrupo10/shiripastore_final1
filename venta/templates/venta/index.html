@@ -42,11 +42,19 @@
                   <i class="fa-solid fa-cart-shopping fa-lg"></i>
                 </a>
               </li>
+              
+              {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="../../../micuenta">
-                  <i class="fa-solid fa-user fa-lg"></i>
-                </a>
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../administrador">@{{ user.username }}</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-user fa-lg"></i></a>
+              </li>
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -244,9 +252,9 @@
       </div>
     </div>
   </section>
-  <a href="{% url 'crud_plataformas' %}">Lista de Plataformas</a> 
+  <!-- <a href="{% url 'crud_plataformas' %}">Lista de Plataformas</a> 
   <a href="{% url 'crud_categorias' %}">Lista de Categorias</a>
-  <a href="{% url 'crud_inventario' %}">Lista de Inventarios</a>
+  <a href="{% url 'crud_inventario' %}">Lista de Inventarios</a> -->
 
   
 
