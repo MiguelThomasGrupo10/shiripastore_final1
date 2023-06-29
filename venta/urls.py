@@ -23,16 +23,17 @@ urlpatterns = [
     path('borrar_categorias/<str:pk>',views.borrar_categorias,name='categorias_del'),
     path('actualizar_categorias/<str:pk>',views.actualizar_categoria,name='categorias_edit'),
 
+    path('listar_colecciones',views.mostrar_colecciones,name='crud_colecciones'),
+    path('agregar_colecciones',views.agregar_colecciones,name='coleccionesAdd'),
+    path('borrar_colecciones/<str:pk>',views.borrar_colecciones,name='colecciones_del'),
+    path('actualizar_colecciones/<str:pk>',views.actualizar_colecciones,name='colecciones_edit'),
+
     path('listar_inventario', views.lista_inventario,name='crud_inventario'),
     path('agregar_inventario', views.agregar_inventario,name='inventarioAdd'),
     path('buscar_inventario/<str:pk>', views.buscar_inventario,name='inventarioFindEdit'),
     path('borrar_inventario/<str:pk>', views.borrar_inventario,name='inventario_del'),
-    path('actualizar_inventarios', views.actualizar_inventario,name='inventario_edit'),
+    path('actualizar_inventarios', views.actualizar_inventario,name='inventario_edit')
 
     #path("accounts/", include("django.contrib.auth.urls")),
-
-
-
-
 
 ]

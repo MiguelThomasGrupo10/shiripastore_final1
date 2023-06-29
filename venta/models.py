@@ -19,6 +19,14 @@ class Plataforma(models.Model):
 
     def __str__(self):
         return str(self.plataforma) 
+    
+class Coleccion(models.Model):
+    Id_coleccion = models.AutoField(db_column='idColeccion', primary_key=True)
+    coleccion = models.CharField(unique=True, max_length=100)
+
+    def __str__(self):
+        return str(self.coleccion) 
+    
 
 
 class Inventario(models.Model):

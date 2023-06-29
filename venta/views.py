@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Plataforma, Categoria, Inventario
-from .forms import PlataformaForm, CategoriaForm
+from .models import Plataforma, Categoria, Inventario, Coleccion
+from .forms import PlataformaForm, CategoriaForm, ColeccionForm
 
 # Create your views here.
 TEMPLATE_DIRS = (
@@ -107,7 +107,7 @@ def borrar_inventario(request,pk):
         return render(request,'venta/inventario/inventario_list.html',context)
     except:
         mensaje = "NO se eliminó el juego"
-        lista_inventario = Invventario.objects.all()
+        lista_inventario = Inventario.objects.all()
         context={"inventario":lista_inventario, "mensaje":mensaje}
         return render(request,'venta/inventario/inventario_list.html',context)
 
@@ -274,7 +274,66 @@ def actualizar_categoria(request, pk):
 
 
 
+#listar colecciones
+def mostrar_colecciones(request):
+    lista_colecciones = Coleccion.objects.all()
+    context={"colecciones":lista_colecciones}
+    return render(request,'venta/colecciones/colecciones_list.html',context)
 
+#agregar colecciones
+def agregar_colecciones(request):
+    if request.method == "POST":
+        form = ColeccionForm(request.POST)
+        if form.is_valid:
+            form.save() #insert
+            form = ColeccionForm()
+            context = {"mensaje": "Se grabo la coleccion", "form": form}
+            return render(request,'venta/colecciones/colecciones_add.html',context)
+            
+    else:
+        form = ColeccionForm()
+        context = {"form": form}
+        return render(request,'venta/colecciones/colecciones_add.html',context)
+
+#eliminar colecciones
+def borrar_colecciones(request,pk):
+    errores = []
+    lista_colecciones = Coleccion.objects.all()
+    try:
+        coleccion = Coleccion.objects.get(Id_coleccion=pk)
+        #Aqui hay que llamar a otra funcion de python que sea una confirmación de lo que borramos.
+        if coleccion:
+            coleccion.delete() #Delete en la BD
+            context={"mensaje": "Coleccion eliminada", "colecciones": lista_colecciones, "errores": errores,}
+            return render(request,'venta/colecciones/colecciones_list.html',context)
+    except:
+        lista_colecciones = Coleccion.objects.all()
+        context={"mensaje":"No existe la coleccion", "colecciones": lista_colecciones, "errores": errores,}
+        return render(request,'venta/colecciones/colecciones_list.html',context)
+
+#modificar colecciones
+def actualizar_colecciones(request, pk):
+    try:
+        coleccion = Coleccion.objects.get(Id_coleccion=pk)
+        context={}
+        if coleccion:
+            print("Edit encontro la coleccion")
+            if request.method == "POST":
+                print("edit,es un post")
+                form = ColeccionForm(request.POST,instance=coleccion)
+                form.save()
+                context = {"mensaje": "Se actualizó la coleccion", "form":form, "coleccion":coleccion}
+                return render(request,'venta/colecciones/colecciones_edit.html',context)
+            else:
+                form = ColeccionForm(instance=coleccion)
+                mensaje = ""
+                context = {"mensaje": mensaje, "form":form, "coleccion":coleccion}
+                return render(request, 'venta/colecciones/colecciones_edit.html', context)
+    except:
+        mensaje = "No existe la coleccion"
+        lista_colecciones = Coleccion.objects.all()
+        context = {"mensaje": mensaje, "form":form, "coleccion":lista_colecciones}
+        return render(request, 'venta/colecciones/colecciones_list.html', context)
 
 
 
