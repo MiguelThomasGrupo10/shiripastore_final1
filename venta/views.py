@@ -44,7 +44,8 @@ def lista_inventario(request):
     lista_inventario = Inventario.objects.raw("SELECT * FROM venta_inventario")
     lista_categorias = Categoria.objects.all()
     lista_plataformas = Plataforma.objects.all()
-    context = {"inventario":lista_inventario, "plataformas": lista_plataformas, "categorias": lista_categorias}
+    lista_colecciones = Coleccion.objects.all()
+    context = {"inventario":lista_inventario, "plataformas": lista_plataformas, "categorias": lista_categorias, "colecciones":lista_colecciones}
     return render(request,'venta/inventario/inventario_list.html',context)
 
 #agregar inventario
@@ -52,12 +53,14 @@ def agregar_inventario(request):
     if request.method != "POST":
         lista_categorias = Categoria.objects.all()
         lista_plataformas = Plataforma.objects.all()
-        context={"categorias":lista_categorias, "plataformas":lista_plataformas}
+        lista_colecciones = Coleccion.objects.all()
+        context={"categorias":lista_categorias, "plataformas":lista_plataformas, "colecciones": lista_colecciones}
         return render(request,'venta/inventario/inventario_add.html',context)
     else:
         #rescatamos en variables os valores del formulario (name)
         categoria = request.POST["categoria"]
         plataforma = request.POST["plataforma"]
+        coleccion = request.POST["coleccion"]
         nombre_juego = request.POST["nombre_juego"]
         valor = request.POST["valor"]
         stock = request.POST["stock"]
@@ -65,10 +68,12 @@ def agregar_inventario(request):
 
         objCategoria = Categoria.objects.get(Id_categoria = categoria)
         objPlataforma = Plataforma.objects.get(Id_plataforma = plataforma)
+        objColeccion = Coleccion.objects.get(Id_coleccion = coleccion)
 
         objInventario = Inventario.objects.create(  
             Id_categoria     = objCategoria,
             Id_plataforma    = objPlataforma,
+            Id_coleccion     = objColeccion,
             nombre_juego     = nombre_juego,
             valor            = valor,
             stock            = stock,
@@ -77,7 +82,8 @@ def agregar_inventario(request):
         objInventario.save() #insert en la base de datos
         lista_categorias = Categoria.objects.all()
         lista_plataformas = Plataforma.objects.all()
-        context = {"mensaje":"Se guardó el juego al inventario","plataforma":lista_plataformas, "categoria":lista_categorias}
+        lista_colecciones = Coleccion.objects.all()
+        context = {"mensaje":"Se guardó el juego al inventario","plataforma":lista_plataformas, "categoria":lista_categorias, "coleccion": lista_colecciones}
         return render(request,'venta/inventario/inventario_add.html',context)
 
 #Buscar Inventario (buscar objeto de inventario para modificar.)
@@ -86,7 +92,8 @@ def buscar_inventario(request,pk):
         inventario = Inventario.objects.get(Id_juego=pk)
         lista_categoria = Categoria.objects.all()
         lista_plataforma = Plataforma.objects.all()
-        context={"inventario":inventario, "categorias":lista_categoria, "plataformas":lista_plataforma}
+        lista_colecciones = Coleccion.objects.all()
+        context={"inventario":inventario, "categorias":lista_categoria, "plataformas":lista_plataforma, "colecciones":lista_colecciones}
         if Inventario:
             return render(request,'venta/inventario/inventario_edit.html',context)
         else:
@@ -119,18 +126,21 @@ def actualizar_inventario(request):
         Id_juego = request.POST["Id_juego"]
         categoria = request.POST["categoria"]
         plataforma = request.POST["plataforma"]
+        coleccion = request.POST["coleccion"]
         nombre_juego = request.POST["nombre_juego"]
         valor = request.POST["valor"]
         stock = request.POST["stock"]
 
         objCategoria = Categoria.objects.get(Id_categoria = categoria)
         objPlataforma = Plataforma.objects.get(Id_plataforma = plataforma)
+        objColeccion = Coleccion.objects.get(Id_coleccion = coleccion)
 
         #crea alumno (izp:nombre del campo de la BD, derecho:variable local)
         objInventario = Inventario()
-        objInventario.Id_juego = Id_juego
+        objInventario.Id_juego      = Id_juego
         objInventario.Id_categoria  = objCategoria
         objInventario.Id_plataforma = objPlataforma
+        objInventario.Id_coleccion  = objColeccion
         objInventario.nombre_juego  = nombre_juego
         objInventario.valor         = valor
         objInventario.stock         = stock
@@ -139,7 +149,8 @@ def actualizar_inventario(request):
         objInventario.save() #update en la base de datos
         lista_categoria = Categoria.objects.all()
         lista_plataforma = Plataforma.objects.all()
-        context = {"mensaje":"Se guardó el juego al inventario","plataforma":lista_plataforma, "categoria":lista_categoria}
+        lista_colecciones = Coleccion.objects.all()
+        context = {"mensaje":"Se guardó el juego al inventario","plataforma":lista_plataforma, "categoria":lista_categoria, "coleccion":lista_colecciones}
         return render(request,'venta/inventario/inventario_edit.html',context)
     else:
         lista_Inventario = Inventario.objects.all()
@@ -336,7 +347,9 @@ def actualizar_colecciones(request, pk):
         return render(request, 'venta/colecciones/colecciones_list.html', context)
 
 
+#Filtro de busqueda para nombre de juego en inventario.
 
+#Filtro de busqueda para coleccion en inventario.
 
 
 
