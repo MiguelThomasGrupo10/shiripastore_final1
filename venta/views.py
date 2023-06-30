@@ -47,10 +47,16 @@ def administrador(request):
 #Listar inventario
 @login_required
 def lista_inventario(request):
-    lista_inventario = Inventario.objects.raw("SELECT * FROM venta_inventario")
+    buscar = request.GET.get("buscar")
+    
+    lista_inventario = Inventario.objects.all()
     lista_categorias = Categoria.objects.all()
     lista_plataformas = Plataforma.objects.all()
     lista_colecciones = Coleccion.objects.all()
+    if buscar != '' and buscar is not None:
+        lista_inventario = lista_inventario.filter(nombre_juego__contains = buscar)
+        context = {"inventario":lista_inventario, "plataformas": lista_plataformas, "categorias": lista_categorias, "colecciones":lista_colecciones}
+        return render(request,'venta/inventario/inventario_list.html',context)
     context = {"inventario":lista_inventario, "plataformas": lista_plataformas, "categorias": lista_categorias, "colecciones":lista_colecciones}
     return render(request,'venta/inventario/inventario_list.html',context)
 
@@ -140,6 +146,7 @@ def actualizar_inventario(request):
         nombre_juego = request.POST["nombre_juego"]
         valor = request.POST["valor"]
         stock = request.POST["stock"]
+        disponible = request.POST["disponible"]
 
         objCategoria = Categoria.objects.get(Id_categoria = categoria)
         objPlataforma = Plataforma.objects.get(Id_plataforma = plataforma)
@@ -154,7 +161,7 @@ def actualizar_inventario(request):
         objInventario.nombre_juego  = nombre_juego
         objInventario.valor         = valor
         objInventario.stock         = stock
-        objInventario.activo        = 1
+        objInventario.disponible    = disponible
          
         objInventario.save() #update en la base de datos
         lista_categoria = Categoria.objects.all()
@@ -173,7 +180,12 @@ def actualizar_inventario(request):
 #Listar plataformas
 @login_required  
 def mostrar_plataformas(request):
+    buscarplat = request.GET.get("buscarplat")
     lista_plataformas = Plataforma.objects.all()
+    if buscarplat != '' and buscarplat is not None:
+        lista_plataformas = lista_plataformas.filter(plataforma__exact = buscarplat)
+        context = {"plataformas": lista_plataformas}
+        return render(request,'venta/plataforma/plataforma_list.html',context)
     context={"plataformas":lista_plataformas}
     return render(request,'venta/plataforma/plataforma_list.html',context)
 
@@ -369,7 +381,9 @@ def actualizar_colecciones(request, pk):
         return render(request, 'venta/colecciones/colecciones_list.html', context)
 
 
-#Filtro de busqueda para nombre de juego en inventario.
+
+
+
 
 #Filtro de busqueda para coleccion en inventario.
 
