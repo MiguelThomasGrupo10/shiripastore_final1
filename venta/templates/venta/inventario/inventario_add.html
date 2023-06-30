@@ -71,6 +71,12 @@
                 {% endfor %}
               </select>
               </pre>
+        <pre>Coleccion: <select name="coleccion">
+                {% for tmp in colecciones %}
+                  <option value="{{tmp.Id_coleccion}}">{{tmp.coleccion}}</option>
+                  {% endfor %}
+                </select>
+              </pre>
         <pre>Valor: <input type="number" name="valor"> </pre>
         <pre>Stock: <input type="number" name="stock"> </pre>
         <input type="submit" class="btn btn-primary" value="Agregar">

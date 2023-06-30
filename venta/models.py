@@ -38,6 +38,7 @@ class Inventario(models.Model):
     Id_juego         = models.AutoField(primary_key=True)
     Id_categoria     = models.ForeignKey('Categoria', on_delete=models.CASCADE, db_column='idCategoria')
     Id_plataforma    = models.ForeignKey('Plataforma', on_delete=models.CASCADE, db_column='idPlataforma')
+    Id_coleccion     = models.ForeignKey('Coleccion', on_delete=models.CASCADE,db_column='idColeccion')
     nombre_juego     = models.CharField(max_length=30) 
     valor            = models.DecimalField(max_digits=8, decimal_places=2)  
     stock            = models.IntegerField(default=100)  
