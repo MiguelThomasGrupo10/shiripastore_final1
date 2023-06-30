@@ -74,6 +74,7 @@
             <th scope="col">Nombre del juego</th>
             <th scope="col">Categoria</th>
             <th scope="col">Plataforma</th>
+            <th scope="col">Coleccion</th>
             <th scope="col">Valor</th>
             <th scope="col">Stock</th>
             <th scope="col">Disponible</th>
@@ -84,10 +85,10 @@
                     <td class="text fs-5">{{tmp.nombre_juego}}</td>
                     <td class="text fs-5">{{tmp.Id_categoria}}</td>
                     <td class="text fs-5">{{tmp.Id_plataforma}}</td>
+                    <td class="text fs-5">{{tmp.Id_coleccion}}</td>
                     <td class="text fs-5">{{tmp.valor}}</td>
                     <td class="text fs-5">{{tmp.stock}}</td>
                     <td class="text fs-5">{{tmp.disponible}}</td>
-                    
                     <td><button type="button" class="btn btn-outline-danger text-dark"><a class="text-decoration-none text-dark" href="{% url 'inventario_del' pk=tmp.Id_juego %}">Eliminar</a></button></td>
                     <td><button type="button" class="btn btn-outline-warning text-dark"><a class="text-decoration-none text-dark" href="{% url 'inventarioFindEdit' pk=tmp.Id_juego %}">Modificar</a></button></td>
                     </tr>
