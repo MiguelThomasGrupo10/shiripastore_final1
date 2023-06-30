@@ -69,6 +69,12 @@
             <a class= "text-decoration-none text-dark" href="{% url 'inventarioAdd' %}">Agregar inventario</a>
           </button>
         </div>
+        <form action="" method="GET">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control ml-3" name="buscar" placeholder="Ingresa el nombre del juego" aria-label="Ingresa el nombre del juego" aria-describedby="button-addon2">
+            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Buscar</button>
+          </div>
+        </form>
 
         {% if inventario %}
             <th scope="col">Nombre del juego</th>

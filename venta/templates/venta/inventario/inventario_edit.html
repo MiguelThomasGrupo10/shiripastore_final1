@@ -78,18 +78,13 @@
           </pre>
           <pre>Valor: <input type="number" name="valor" value="{{inventario.valor}}"> </pre>
           <pre>Stock: <input type="number" name="stock" value="{{inventario.stock}}"> </pre>
+          <pre>Disponible: <input type="number" name="disponible" value="{{inventario.disponible}}"></pre>
           <input type="submit" value="Agregar">
       </form>
       {% endif %}
   
       <br><br>
-  
-      <div id="idMensajes">
-          {% if mensaje %}
-              {{mensaje}}
-          {% endif %}
-      </div>
-      {% endif %}
+      
       
       <div class="container mt-4">
           <div id="idMensajes">

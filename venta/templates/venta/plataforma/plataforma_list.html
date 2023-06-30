@@ -71,6 +71,12 @@
             <a class= "text-decoration-none text-dark" href="{% url 'plataformasAdd' %}">Agregar Plataforma</a>
           </button>
         </div>
+        <form action="" method="GET">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control ml-3" name="buscarplat" placeholder="Ingresa la plataforma" aria-label="Ingresa la plataforma" aria-describedby="button-addon2">
+            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Buscar</button>
+          </div>
+        </form>
         {% if plataformas %}
         <th scope="col"></th>
         <th scope="col"></th>

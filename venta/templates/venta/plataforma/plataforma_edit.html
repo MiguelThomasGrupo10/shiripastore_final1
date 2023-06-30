@@ -55,26 +55,30 @@
     </section>
     <br>
     <br>
-    <h3>Modificar plataformas</h3>
     {% if plataforma %}
     <section class="ml-3">
-        <form action="" method="POST">
-          {% csrf_token %}
-          {{form.as_table}}
-          
-          <input type="submit" class="btn btn-primary" name="opcion" value="Actualizar">
-        </form>
+        <div class="col-12 col-md-8 offset-md-4">
+            <h3 class="mb-5">Modificar plataformas</h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_table}}
+                
+                <input type="submit" class="btn btn-primary" name="opcion" value="Actualizar">
+              </form>
+              <br>
+              <div id="idMensajes">
+                {% if mensaje %}
+                  {{mensaje}}
+                {% endif %}
+              </div>
+              <br>
+              <div class="d-grid gap-2 d-md-flex col-12 col-md-8 offset-md-3">  
+                <a class="btn btn-outline-primary" href="{% url 'crud_plataformas' %}">Volver</a>
+              </div>
+              
+        </div>
       </section>
     {% endif %}
-    
-    <br>
-    <div id="idMensajes">
-      {% if mensaje %}
-        {{mensaje}}
-      {% endif %}
-    </div>
-    <br>
-    <a class="btn btn-outline-primary" href="{% url 'crud_plataformas' %}">Volver</a>
     
     
     </body>
