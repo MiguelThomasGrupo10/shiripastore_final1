@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/9598d0e898.js" crossorigin="anonymous"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/9598d0e898.js"
+      crossorigin="anonymous"
+    ></script>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
     <title>Shiripa Store | Tienda</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="principal">
       <div class="menu">
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="../index"><img class="logo" src="{% static 'IMG/Logo_Borde_Azul.png' %}"
-                alt="logo" /></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <a class="navbar-brand" href="../index"
+              ><img
+                class="logo"
+                src="{% static 'IMG/Logo_Borde_Azul.png' %}"
+                alt="logo"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapsibleNavbar"
+            >
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -50,178 +71,226 @@
         </nav>
       </div>
     </section>
-        <section class="productos">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="section-header encabezado-tienda text-white text-center pb-5">
-                  <h2>Productos</h2>
-                  <p>Nuestra lista de productos esta en crecimiento constante</p>
-                </div>
-              </div>
+    <section class="productos">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              class="section-header encabezado-tienda text-white text-center pb-5"
+            >
+              <h2>Productos</h2>
+              <p>Nuestra lista de productos esta en crecimiento constante</p>
             </div>
-            <h3>Recomendado para ti</h3>
-            <div class="row g-3">
-              <div class="col-12 col-md-12 col-lg-4">
-               <div class="card border-light text-center pb-2">
-                 <div class="card-body">
-                  <div class="img-area mb-4">
-                   <img class="img-fluid" src="{% static 'IMG/re4-thumbnail.jpg' %}" alt="re4thumb">
-                  </div>
-                   <h3 class="card-title">Resident evil 4</h3>
-                   <p class="card-text pb-2 pt-2"><strong> $40.000 </strong></p>
-                   <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                 </div>
-               </div>
-              </div>
-   
-              <div class="col-12 col-md-12 col-lg-4">
-                <div class="card border-light text-center pb-2">
-                  <div class="card-body">
-                   <div class="img-area mb-4">
-                    <img class="img-fluid" src="{% static 'IMG/tlofu-thumbnail.jpg' %}" alt="tlofuthumb">
-                   </div>
-                    <h3 class="card-title">The Last of us</h3>
-                    <p class="card-text pb-2 pt-2"><strong> $30.000 </strong></p>
-                    <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                  </div>
-                </div>
-               </div>
-   
-               <div class="col-12 col-md-12 col-lg-4">
-                <div class="card border-light text-center pb-2">
-                  <div class="card-body">
-                   <div class="img-area mb-4">
-                    <img class="img-fluid" src="{% static 'IMG/swfo-thumbnail.jpg' %}" alt="swfothumb">
-                   </div>
-                    <h3 class="card-title">Star wars: Fallen Order</h3>
-                    <p class="card-text pb-2 pt-2"><strong> $10.000 </strong></p>
-                    <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                  </div>
-                </div>
-               </div>
-           </div>
-
-           <div class="row g-3">
-            <div class="col-12 col-md-12 col-lg-4">
-             <div class="card border-light text-center pb-2">
-               <div class="card-body">
-                <div class="img-area mb-4">
-                 <img class="img-fluid" src="{% static 'IMG/nba23-thumbnail.jpg' %}" alt="nba23thumb">
-                </div>
-                 <h3 class="card-title">NBA 2K23</h3>
-                 <p class="card-text pb-2 pt-2"><strong> $30.000 </strong></p>
-                 <a href="#" class="btn btn-primary">Añadir al carrito</a>
-               </div>
-             </div>
-            </div>
- 
-            <div class="col-12 col-md-12 col-lg-4">
-              <div class="card border-light text-center pb-2">
-                <div class="card-body">
-                 <div class="img-area mb-4">
-                  <img class="img-fluid" src="{% static 'IMG/re3-thumbnail.jpg' %}" alt="re3thumb">
-                 </div>
-                  <h3 class="card-title">Resident evil 3</h3>
-                  <p class="card-text pb-2 pt-2"><strong> $10.000 </strong></p>
-                  <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                </div>
-              </div>
-             </div>
- 
-             <div class="col-12 col-md-12 col-lg-4">
-              <div class="card border-light text-center pb-2">
-                <div class="card-body">
-                 <div class="img-area mb-4">
-                  <img class="img-fluid" src="{% static 'IMG/mk11-thumbnail.jpg' %}" alt="mk11thumb">
-                 </div>
-                  <h3 class="card-title">Mortal Kombat 11</h3>
-                  <p class="card-text pb-2 pt-2"><strong> $6.000 </strong></p>
-                  <a href="#" class="btn btn-primary">Añadir al carrito</a>
-                </div>
-              </div>
-             </div>
-         </div>
-
-         <div class="row g-3">
+          </div>
+        </div>
+        <h3>Recomendado para ti</h3>
+        <div class="row g-3">
           <div class="col-12 col-md-12 col-lg-4">
-           <div class="card border-light text-center pb-2">
-             <div class="card-body">
-              <div class="img-area mb-4">
-               <img class="img-fluid" src="{% static 'IMG/dmc4-thumbnail.jpg' %}" alt="dmc4thumb">
+            <div class="card border-light text-center pb-2">
+              <div class="card-body">
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/re4-thumbnail.jpg' %}"
+                    alt="re4thumb"
+                  />
+                </div>
+                <h3 class="card-title">Resident evil 4</h3>
+                <p class="card-text pb-2 pt-2"><strong> $40.000 </strong></p>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
               </div>
-               <h3 class="card-title">Devil May Cry 4</h3>
-               <p class="card-text pb-2 pt-2"><strong> $13.000 </strong></p>
-               <a href="#" class="btn btn-primary">Añadir al carrito</a>
-             </div>
-           </div>
+            </div>
           </div>
 
           <div class="col-12 col-md-12 col-lg-4">
             <div class="card border-light text-center pb-2">
               <div class="card-body">
-               <div class="img-area mb-4">
-                <img class="img-fluid" src="{% static 'IMG/tekken7-thumbnail.jpg' %}" alt="tekken7thumb">
-               </div>
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/tlofu-thumbnail.jpg' %}"
+                    alt="tlofuthumb"
+                  />
+                </div>
+                <h3 class="card-title">The Last of us</h3>
+                <p class="card-text pb-2 pt-2"><strong> $30.000 </strong></p>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-12 col-lg-4">
+            <div class="card border-light text-center pb-2">
+              <div class="card-body">
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/swfo-thumbnail.jpg' %}"
+                    alt="swfothumb"
+                  />
+                </div>
+                <h3 class="card-title">Star wars: Fallen Order</h3>
+                <p class="card-text pb-2 pt-2"><strong> $10.000 </strong></p>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-12 col-lg-4">
+            <div class="card border-light text-center pb-2">
+              <div class="card-body">
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/nba23-thumbnail.jpg' %}"
+                    alt="nba23thumb"
+                  />
+                </div>
+                <h3 class="card-title">NBA 2K23</h3>
+                <p class="card-text pb-2 pt-2"><strong> $30.000 </strong></p>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-12 col-lg-4">
+            <div class="card border-light text-center pb-2">
+              <div class="card-body">
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/re3-thumbnail.jpg' %}"
+                    alt="re3thumb"
+                  />
+                </div>
+                <h3 class="card-title">Resident evil 3</h3>
+                <p class="card-text pb-2 pt-2"><strong> $10.000 </strong></p>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-12 col-lg-4">
+            <div class="card border-light text-center pb-2">
+              <div class="card-body">
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/mk11-thumbnail.jpg' %}"
+                    alt="mk11thumb"
+                  />
+                </div>
+                <h3 class="card-title">Mortal Kombat 11</h3>
+                <p class="card-text pb-2 pt-2"><strong> $6.000 </strong></p>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-12 col-lg-4">
+            <div class="card border-light text-center pb-2">
+              <div class="card-body">
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/dmc4-thumbnail.jpg' %}"
+                    alt="dmc4thumb"
+                  />
+                </div>
+                <h3 class="card-title">Devil May Cry 4</h3>
+                <p class="card-text pb-2 pt-2"><strong> $13.000 </strong></p>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-12 col-lg-4">
+            <div class="card border-light text-center pb-2">
+              <div class="card-body">
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/tekken7-thumbnail.jpg' %}"
+                    alt="tekken7thumb"
+                  />
+                </div>
                 <h3 class="card-title">Tekken 7</h3>
                 <p class="card-text pb-2 pt-2"><strong> $4.000 </strong></p>
                 <a href="#" class="btn btn-primary">Añadir al carrito</a>
               </div>
             </div>
-           </div>
+          </div>
 
-           <div class="col-12 col-md-12 col-lg-4">
+          <div class="col-12 col-md-12 col-lg-4">
             <div class="card border-light text-center pb-2">
               <div class="card-body">
-               <div class="img-area mb-4">
-                <img class="img-fluid" src="{% static 'IMG/unbound-thumbnail.jpg' %}" alt="unboundthumb">
-               </div>
+                <div class="img-area mb-4">
+                  <img
+                    class="img-fluid"
+                    src="{% static 'IMG/unbound-thumbnail.jpg' %}"
+                    alt="unboundthumb"
+                  />
+                </div>
                 <h3 class="card-title">NFS: Unbound</h3>
                 <p class="card-text pb-2 pt-2"><strong> $24.000 </strong></p>
                 <a href="#" class="btn btn-primary">Añadir al carrito</a>
               </div>
             </div>
-           </div>
-       </div>
           </div>
-        </section>
-    
+        </div>
+      </div>
+    </section>
 
+    <div class="">
+      <footer
+        class="d-flex flex-wrap justify-content-between align-items-center py-4 border-top"
+      >
+        <p class="col-md-4 mb-0 ps-3 fs-6 text-white">© 2023 Shiripa Store</p>
 
-          <footer class="bg-primary text-white">
-            <div class="container">
-              <nav class="row">
-                <a href="#" class="col-3 text-reset text-uppercase d-flex align-items-center">
-                  <img src="{% static 'IMG/Logo_Borde_Azul.png' %}" alt="logo footer" class="img-logo mr-2 logo">
-                </a>
-                <ul class="col-3 list-unstyled">
-                  <li class="font-weight-bold  text-uppercase">Utilidad</li>
-                  <li><a href="#" class="text-reset">Recomendaciones</a></li>
-                  <li><a href="#" class="text-reset">Reseñas</a></li>
-                  <li><a href="#" class="text-reset">Tienda fisica</a></li>
-      
-                </ul>
-                <ul class="col-3 list-unstyled">
-                  <li class="font-weight-bold text-uppercase">Accesos rapidos</li>
-                  <li><a href="#" class="text-reset">Tienda</a></li>
-                  <li><a href="#" class="text-reset">Sobre nosotros</a></li>
-                  <li><a href="#" class="text-reset">Contacto</a></li>
-                  <li><a href="#" class="text-reset">Mi carrito</a></li>
-                  <li><a href="#" class="text-reset">Mi cuenta</a></li>
-                </ul>
-      
-                <ul class="col-3 list-unstyled">
-                  <li class="font-weight-bold text-uppercase">Redes Sociales</li>
-                  <li><a href="#" class="text-reset">Facebook</a></li>
-                  <li><a href="#" class="text-reset">Instagram</a></li>
-                  <li><a href="#" class="text-reset">Whatsapp</a></li>
-                  <li><a href="#" class="text-reset">Discord</a></li>
-                  <li><a href="#" class="text-reset">Twitter</a></li>
-                </ul>
-              </nav>
-            </div>
-          </footer>
-          <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+        <a
+          href="/"
+          class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto"
+          ><img
+            class="logo"
+            src="{% static 'IMG/Logo_Borde_Azul.png' %}"
+            alt="logo"
+          />
+        </a>
+
+        <ul class="nav col-md-4 justify-content-end navbar-dark">
+          <li class="nav-item">
+            <a href="../index" class="nav-link px-2 fs-6 footerlink">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a href="../tienda" class="nav-link px-2 fs-6 footerlink">Tienda</a>
+          </li>
+          <li class="nav-item">
+            <a href="../nosotros" class="nav-link px-2 fs-6 footerlink"
+              >Sobre nosotros</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="../../../contacto" class="nav-link px-2 fs-6 footerlink"
+              >Contacto</a
+            >
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
