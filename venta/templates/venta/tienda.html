@@ -72,177 +72,53 @@
       </div>
     </section>
     <section class="productos">
+      <!-- <div class="row">
+        <h2>Tienda | Explora nuestro catálogo</h2>
+        {% for producto in productos %}
+          <div class="col-12 col-sm-3 col-md-4 col-lg-3">
+            <div class="card">
+              <img src="{{producto.imagen.url}}" class="card-img-top" alt="{{producto.nombre}}">
+              <div class="card-body">
+                <h5 class="card-title">{{producto.nombre}}</h5>
+                <p class="card-text">{{producto.categoria}}</p>
+                <p class="card-text">${{producto.precio}}</p>
+                <a href="#" class="btn btn-primary">Agregar al carrito</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>  -->
+
+        <hr>
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div
               class="section-header encabezado-tienda text-white text-center pb-5"
             >
-              <h2>Productos</h2>
+              <h2>Tienda | Explora nuestro catálogo!</h2>
               <p>Nuestra lista de productos esta en crecimiento constante</p>
             </div>
           </div>
         </div>
-        <h3>Recomendado para ti</h3>
-        <div class="row g-3">
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/re4-thumbnail.jpg' %}"
-                    alt="re4thumb"
-                  />
+        <div class="row">
+          {% if inventario %}
+          {% for tmp in inventario %}
+            <div class="col-12 col-sm-3 col-md-4 col-lg-3">
+              <div class="card">
+                <img src="{{tmp.imagen.url}}" class="card-img-top" alt="{{tmp.nombre_juego}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{tmp.nombre_juego}}</h5>
+                  <p class="card-text">{{tmp.Id_categoria}}</p>
+                  <p class="card-text">${{tmp.valor}}</p>
+                  <a href="#" class="btn btn-primary">Agregar al carrito</a>
                 </div>
-                <h3 class="card-title">Resident evil 4</h3>
-                <p class="card-text pb-2 pt-2"><strong> $40.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
               </div>
             </div>
-          </div>
-
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/tlofu-thumbnail.jpg' %}"
-                    alt="tlofuthumb"
-                  />
-                </div>
-                <h3 class="card-title">The Last of us</h3>
-                <p class="card-text pb-2 pt-2"><strong> $30.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/swfo-thumbnail.jpg' %}"
-                    alt="swfothumb"
-                  />
-                </div>
-                <h3 class="card-title">Star wars: Fallen Order</h3>
-                <p class="card-text pb-2 pt-2"><strong> $10.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row g-3">
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/nba23-thumbnail.jpg' %}"
-                    alt="nba23thumb"
-                  />
-                </div>
-                <h3 class="card-title">NBA 2K23</h3>
-                <p class="card-text pb-2 pt-2"><strong> $30.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/re3-thumbnail.jpg' %}"
-                    alt="re3thumb"
-                  />
-                </div>
-                <h3 class="card-title">Resident evil 3</h3>
-                <p class="card-text pb-2 pt-2"><strong> $10.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/mk11-thumbnail.jpg' %}"
-                    alt="mk11thumb"
-                  />
-                </div>
-                <h3 class="card-title">Mortal Kombat 11</h3>
-                <p class="card-text pb-2 pt-2"><strong> $6.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row g-3">
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/dmc4-thumbnail.jpg' %}"
-                    alt="dmc4thumb"
-                  />
-                </div>
-                <h3 class="card-title">Devil May Cry 4</h3>
-                <p class="card-text pb-2 pt-2"><strong> $13.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/tekken7-thumbnail.jpg' %}"
-                    alt="tekken7thumb"
-                  />
-                </div>
-                <h3 class="card-title">Tekken 7</h3>
-                <p class="card-text pb-2 pt-2"><strong> $4.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-12 col-lg-4">
-            <div class="card border-light text-center pb-2">
-              <div class="card-body">
-                <div class="img-area mb-4">
-                  <img
-                    class="img-fluid"
-                    src="{% static 'IMG/unbound-thumbnail.jpg' %}"
-                    alt="unboundthumb"
-                  />
-                </div>
-                <h3 class="card-title">NFS: Unbound</h3>
-                <p class="card-text pb-2 pt-2"><strong> $24.000 </strong></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          {% endfor %}
+          {% endif %}
+        </div> 
+        <hr>
     </section>
 
     <div class="">
