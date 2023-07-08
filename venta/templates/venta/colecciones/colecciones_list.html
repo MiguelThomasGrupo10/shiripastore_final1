@@ -60,20 +60,34 @@
                     <i class="fa-solid fa-cart-shopping fa-lg"></i>
                   </a>
                 </li>
+
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="../../../micuenta">
-                    <i class="fa-solid fa-user fa-lg"></i>
-                  </a>
+                  <a class="nav-link" href="{% url 'logout' %}"
+                    >Cerrar sesión</a
+                  >
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../administrador"
+                    >@{{ user.username }}</a
+                  >
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}"
+                    ><i class="fa-solid fa-user fa-lg"></i
+                  ></a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
         </nav>
-      </div>
+      </div> 
     </section>
     <br />
     <br />
-
+    <section class="container">
     <br />
     <div id="idMensajes">{% if mensaje %} {{mensaje}} {% endif %}</div>
     <br />
@@ -121,6 +135,7 @@
       >Volver</a
     >
     <br />
+  </section>
 
     <div class="">
       <footer

@@ -17,9 +17,18 @@
       <div class="menu">
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="../index"><img class="logo" src="{% static 'IMG/Logo_Borde_Azul.png' %}"
-                alt="logo" /></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <a class="navbar-brand" href="../index"
+              ><img
+                class="logo"
+                src="{% static 'IMG/Logo_Borde_Azul.png' %}"
+                alt="logo"
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapsibleNavbar"
+            >
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -41,17 +50,31 @@
                     <i class="fa-solid fa-cart-shopping fa-lg"></i>
                   </a>
                 </li>
+
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="../../../micuenta">
-                    <i class="fa-solid fa-user fa-lg"></i>
-                  </a>
+                  <a class="nav-link" href="{% url 'logout' %}"
+                    >Cerrar sesión</a
+                  >
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../administrador"
+                    >@{{ user.username }}</a
+                  >
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}"
+                    ><i class="fa-solid fa-user fa-lg"></i
+                  ></a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
         </nav>
-      </div>
-
+      </div> 
+    </section>
 
       <section class="container">
 
