@@ -27,9 +27,40 @@ def formRegistro(request):
 def micuenta(request):
     return render(request, "venta/usuario/micuenta.html")
 
-def tienda(request):
-    return render(request, "venta/tienda.html")
 
+def tienda(request):
+    lista_inventario = Inventario.objects.all()
+    lista_categorias = Categoria.objects.all()
+
+    context = {"inventario":lista_inventario,"categoria":lista_categorias}
+    return render(request, "venta/tienda.html",context)
+
+# def tienda(request):
+#     productos = Producto.objects.all()
+#     return render(request, "venta/tienda.html", {'productos':productos})
+
+# def agregar_producto(request, producto_id):
+#     carrito = Carrito(request)
+#     producto = Producto.objects.get(id=producto_id)
+#     carrito.agregar(producto)
+#     return redirect("Venta:tienda")
+
+# def eliminar_producto(request, producto_id):
+#     carrito = Carrito(request)
+#     producto = Producto.objects.get(id=producto_id)
+#     carrito.eliminar(producto)
+#     return redirect("Venta:tienda")
+
+# def restar_producto(request, producto_id):
+#     carrito = Carrito(request)
+#     producto = Producto.objects.get(id=producto_id)
+#     carrito.eliminar(producto)
+#     return redirect("Venta:tienda")
+
+# def limpiar_carrito(request, producto_id):
+#     carrito = Carrito(request)
+#     carrito.limpiar()
+#     return redirect("Venta:tienda")
 
 @login_required
 def administrador(request):

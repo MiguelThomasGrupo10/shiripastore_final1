@@ -39,15 +39,24 @@ class Inventario(models.Model):
     Id_categoria     = models.ForeignKey('Categoria', on_delete=models.CASCADE, db_column='idCategoria')
     Id_plataforma    = models.ForeignKey('Plataforma', on_delete=models.CASCADE, db_column='idPlataforma')
     Id_coleccion     = models.ForeignKey('Coleccion', on_delete=models.CASCADE,db_column='idColeccion')
+    imagen           = models.ImageField(upload_to='static/IMG')
     nombre_juego     = models.CharField(max_length=30) 
     valor            = models.DecimalField(max_digits=8, decimal_places=2)  
     stock            = models.IntegerField(default=100)  
     disponible       = models.CharField(max_length=20, choices=DISPONIBILIDAD_CHOICES)
 
     def __str__(self):
-        return str(self.nombre_juego)+" "+str(self.plataforma)
+        return str(self.nombre_juego)+" "+str(self.Id_plataforma)
 
-#Tablas de Boleta, Categoria, Plataforma
+# #PRUEBA VIDEO CARRITO DE COMPRAS
+# class Producto(models.Model):
+#     imagen = models.ImageField(upload_to='static/IMG')
+#     nombre = models.CharField(max_length=64)
+#     categoria = models.CharField(max_length=32)
+#     precio = models.IntegerField()
+
+#     def __str__(self):
+#         return f'{self.nombre} -> {self.precio}'
 
 
 
