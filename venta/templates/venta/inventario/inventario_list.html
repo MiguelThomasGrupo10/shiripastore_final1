@@ -78,6 +78,7 @@
 
         {% if inventario %}
             <th scope="col">Nombre del juego</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Categoria</th>
             <th scope="col">Plataforma</th>
             <th scope="col">Coleccion</th>
@@ -89,6 +90,9 @@
                {% for tmp in inventario %}
                   <tr>
                     <td class="text fs-5">{{tmp.nombre_juego}}</td>
+                    {% if tmp.imagen %}
+                    <td><img src="{{ tmp.imagen.url }}" alt="" style="height: 60px; width: 60px; "></td>
+                    {% endif %}
                     <td class="text fs-5">{{tmp.Id_categoria}}</td>
                     <td class="text fs-5">{{tmp.Id_plataforma}}</td>
                     <td class="text fs-5">{{tmp.Id_coleccion}}</td>
