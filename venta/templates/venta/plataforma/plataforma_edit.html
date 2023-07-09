@@ -100,7 +100,6 @@
                 </form>
               </section>
               <br />
-              <div id="idMensajes">{% if mensaje %} {{mensaje}} {% endif %}</div>
               <br />
               <a class="btn btn-outline-primary" href="{% url 'crud_plataformas' %}"
                 >Volver</a
@@ -112,6 +111,23 @@
       </div>
     </section>
     {% endif %}
+
+    <!-- Script de Sweet Alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div id="idMensajes">
+      {% if messages %}
+      {% for m in messages %}
+        <script>
+        Swal.fire({
+          "title": "Felicitaciones",
+          "text": "{{m}}",
+          "icon":"success"
+        })
+        </script>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <!-- Fin de Script de Sweet Alerts -->
 
     <div class="">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 border-top">

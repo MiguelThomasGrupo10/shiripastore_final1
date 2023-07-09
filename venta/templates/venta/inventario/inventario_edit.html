@@ -88,6 +88,9 @@
                 {% csrf_token %}
                 <pre><input type="hidden" name="Id_juego" value="{{inventario.Id_juego}}"></pre>
                 <pre class="form-label">Nombre del Juego: <input type="text" name="nombre_juego" class="form-control" value="{{inventario.nombre_juego}}"> </pre>
+
+                <pre class="input-group-text">Imagen del juego: <input type="file" class="form-control" name="imagen"  value="{{inventario.imagen}}"></pre>
+
                 <pre>Categoria: <select class="form-select" name="categoria">
                       {% for tmp in categorias %}
                       <option value="{{tmp.Id_categoria}}">{{tmp.categoria}}</option>
@@ -129,6 +132,22 @@
       </div>
       </div>
     </section>
+
+    <!-- Script de Sweet Alerts -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div id="idMensajes">
+      {% if messages %}
+          {% for m in messages %}
+            <script>
+               Swal.fire({
+                "title": "Felicitaciones",
+                "text": "{{m}}",
+                "icon":"success"})
+            </script>
+          {% endfor %}
+      {% endif %}
+    </div>
+    <!-- Fin de Script de Sweet Alerts -->
 
 
       <div class="">

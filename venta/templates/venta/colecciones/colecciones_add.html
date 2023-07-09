@@ -111,6 +111,23 @@
       </div>
     </section>
 
+     <!-- Script de Sweet Alerts -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <div id="idMensajes">
+       {% if messages %}
+       {% for m in messages %}
+         <script>
+         Swal.fire({
+           "title": "Felicitaciones",
+           "text": "{{m}}",
+           "icon":"success"
+         })
+         </script>
+         {% endfor %}
+       {% endif %}
+     </div>
+     <!-- Fin de Script de Sweet Alerts -->
+
 
 
 
