@@ -111,14 +111,14 @@
                   <h5 class="card-title">{{tmp.nombre_juego}}</h5>
                   <p class="card-text">{{tmp.Id_categoria}}</p>
                   <p class="card-text">${{tmp.valor}}</p>
-                  <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                  <a href="{% url 'tiendaAdd' inventario_id=tmp.Id_juego %}" class="btn btn-primary">Agregar al carrito</a>
                 </div>
               </div>
             </div>
           {% endfor %}
           {% endif %}
         </div> 
-        <hr>
+        
     </section>
 
     <div class="">
