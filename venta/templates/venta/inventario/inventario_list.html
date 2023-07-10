@@ -121,7 +121,11 @@
                     <td class="text fs-5">{{tmp.Id_coleccion}}</td>
                     <td class="text fs-5">{{tmp.valor}}</td>
                     <td class="text fs-5">{{tmp.stock}}</td>
-                    <td class="text fs-5">{{tmp.disponible}}</td>
+                    {% if tmp.disponible == 1 %}
+                      <td class="text fs-5">No Disponible</td>
+                    {% else %}
+                      <td class="text fs-5">Disponible</td>
+                    {% endif %}
                     
                     <td><button type="button" class="btn btn-outline-danger text-dark"><a class="text-decoration-none text-dark" href="{% url 'inventario_del' pk=tmp.Id_juego %}">Eliminar</a></button></td>
                     <td><button type="button" class="btn btn-outline-warning text-dark"><a class="text-decoration-none text-dark" href="{% url 'inventarioFindEdit' pk=tmp.Id_juego %}">Modificar</a></button></td>

@@ -125,7 +125,7 @@ def agregar_inventario(request):
             imagen           = imagen,
             valor            = valor,
             stock            = stock,
-            disponible       = "1",)
+            disponible       = 1,)
         
         objInventario.save() #insert en la base de datos
         lista_categorias = Categoria.objects.all()
@@ -205,7 +205,7 @@ def actualizar_inventario(request):
         lista_categoria = Categoria.objects.all()
         lista_plataforma = Plataforma.objects.all()
         lista_colecciones = Coleccion.objects.all()
-        messages.success(request,"Agregado correctamente")
+        messages.success(request,"Modificado correctamente")
         context = {"plataforma":lista_plataforma, "categoria":lista_categoria, "coleccion":lista_colecciones}
         return render(request,'venta/inventario/inventario_edit.html',context)
     else:
