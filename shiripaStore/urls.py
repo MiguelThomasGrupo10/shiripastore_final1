@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from venta.views import agregar_juego,eliminar_juego,restar_juego,limpiar_carrito
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('venta.urls')),
     path('',include('usuarios.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
+
+    path('agregar/<int:inventario_id>/', agregar_juego, name="tiendaAdd"),
+    path('eliminar/<int:inventario_id>/', eliminar_juego, name="tiendaDel"),
+    path('restar/<int:inventario_id>/', restar_juego, name="tiendaSub"),
+    path('limpiar/', limpiar_carrito, name="tiendaClean"),
 ]

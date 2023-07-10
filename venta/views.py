@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
+from venta.carrito import Carrito
 from .models import Plataforma, Categoria, Inventario, Coleccion
 from .forms import PlataformaForm, CategoriaForm, ColeccionForm
 from django.contrib.auth.decorators import login_required
@@ -36,32 +38,29 @@ def tienda(request):
     context = {"inventario":lista_inventario,"categoria":lista_categorias}
     return render(request, "venta/tienda.html",context)
 
-# def tienda(request):
-#     productos = Producto.objects.all()
-#     return render(request, "venta/tienda.html", {'productos':productos})
+def agregar_juego(request, inventario_id): #aqui se agrega el juego al carrito
+    carrito = Carrito(request)
+    inventario = Inventario.objects.get(Id_juego=inventario_id)
+    carrito.agregar(inventario)
+    return redirect("carrito")
 
-# def agregar_producto(request, producto_id):
-#     carrito = Carrito(request)
-#     producto = Producto.objects.get(id=producto_id)
-#     carrito.agregar(producto)
-#     return redirect("Venta:tienda")
+def eliminar_juego(request, inventario_id):
+    carrito = Carrito(request)
+    inventario = Inventario.objects.get(Id_juego=inventario_id)
+    carrito.eliminar(inventario)
+    return redirect("carrito")
 
-# def eliminar_producto(request, producto_id):
-#     carrito = Carrito(request)
-#     producto = Producto.objects.get(id=producto_id)
-#     carrito.eliminar(producto)
-#     return redirect("Venta:tienda")
+def restar_juego(request, inventario_id):
+    carrito = Carrito(request)
+    inventario = Inventario.objects.get(Id_juego=inventario_id)
+    carrito.restar(inventario)
+    return redirect("carrito")
 
-# def restar_producto(request, producto_id):
-#     carrito = Carrito(request)
-#     producto = Producto.objects.get(id=producto_id)
-#     carrito.eliminar(producto)
-#     return redirect("Venta:tienda")
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect("carrito")
 
-# def limpiar_carrito(request, producto_id):
-#     carrito = Carrito(request)
-#     carrito.limpiar()
-#     return redirect("Venta:tienda")
 
 @login_required
 def administrador(request):
