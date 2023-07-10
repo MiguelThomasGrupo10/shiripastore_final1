@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
+from venta.carrito import Carrito
 from .models import Plataforma, Categoria, Inventario, Coleccion
 from .forms import PlataformaForm, CategoriaForm, ColeccionForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 TEMPLATE_DIRS = (
@@ -35,32 +38,29 @@ def tienda(request):
     context = {"inventario":lista_inventario,"categoria":lista_categorias}
     return render(request, "venta/tienda.html",context)
 
-# def tienda(request):
-#     productos = Producto.objects.all()
-#     return render(request, "venta/tienda.html", {'productos':productos})
+def agregar_juego(request, inventario_id): #aqui se agrega el juego al carrito
+    carrito = Carrito(request)
+    inventario = Inventario.objects.get(Id_juego=inventario_id)
+    carrito.agregar(inventario)
+    return redirect("carrito")
 
-# def agregar_producto(request, producto_id):
-#     carrito = Carrito(request)
-#     producto = Producto.objects.get(id=producto_id)
-#     carrito.agregar(producto)
-#     return redirect("Venta:tienda")
+def eliminar_juego(request, inventario_id):
+    carrito = Carrito(request)
+    inventario = Inventario.objects.get(Id_juego=inventario_id)
+    carrito.eliminar(inventario)
+    return redirect("carrito")
 
-# def eliminar_producto(request, producto_id):
-#     carrito = Carrito(request)
-#     producto = Producto.objects.get(id=producto_id)
-#     carrito.eliminar(producto)
-#     return redirect("Venta:tienda")
+def restar_juego(request, inventario_id):
+    carrito = Carrito(request)
+    inventario = Inventario.objects.get(Id_juego=inventario_id)
+    carrito.restar(inventario)
+    return redirect("carrito")
 
-# def restar_producto(request, producto_id):
-#     carrito = Carrito(request)
-#     producto = Producto.objects.get(id=producto_id)
-#     carrito.eliminar(producto)
-#     return redirect("Venta:tienda")
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect("carrito")
 
-# def limpiar_carrito(request, producto_id):
-#     carrito = Carrito(request)
-#     carrito.limpiar()
-#     return redirect("Venta:tienda")
 
 @login_required
 def administrador(request):
@@ -103,11 +103,13 @@ def agregar_inventario(request):
     else:
         #rescatamos en variables os valores del formulario (name)
         categoria = request.POST["categoria"]
+        imagen = request.POST["imagen"]
         plataforma = request.POST["plataforma"]
         coleccion = request.POST["coleccion"]
         nombre_juego = request.POST["nombre_juego"]
         valor = request.POST["valor"]
         stock = request.POST["stock"]
+        
        
 
         objCategoria = Categoria.objects.get(Id_categoria = categoria)
@@ -119,15 +121,17 @@ def agregar_inventario(request):
             Id_plataforma    = objPlataforma,
             Id_coleccion     = objColeccion,
             nombre_juego     = nombre_juego,
+            imagen           = imagen,
             valor            = valor,
             stock            = stock,
-            disponible       = "1",)
+            disponible       = 1,)
         
         objInventario.save() #insert en la base de datos
         lista_categorias = Categoria.objects.all()
         lista_plataformas = Plataforma.objects.all()
         lista_colecciones = Coleccion.objects.all()
-        context = {"mensaje":"Se guardó el juego al inventario","plataforma":lista_plataformas, "categoria":lista_categorias, "coleccion": lista_colecciones}
+        messages.success(request,"Agregado correctamente")
+        context = {"plataforma":lista_plataformas, "categoria":lista_categorias, "coleccion": lista_colecciones}
         return render(request,'venta/inventario/inventario_add.html',context)
 
 #Buscar Inventario (buscar objeto de inventario para modificar.)
@@ -154,14 +158,14 @@ def borrar_inventario(request,pk):
         inventario = Inventario.objects.get(Id_juego=pk)
 
         inventario.delete() #delete en la BD
-        mensaje = "Se eliminó el juego"
+        messages.success(request,"Eliminado correctamente")
         lista_inventario = Inventario.objects.all()
-        context={"inventario":lista_inventario, "mensaje":mensaje}
+        context={"inventario":lista_inventario}
         return render(request,'venta/inventario/inventario_list.html',context)
     except:
-        mensaje = "NO se eliminó el juego"
+        messages.error(request,"No se pudo eliminar")
         lista_inventario = Inventario.objects.all()
-        context={"inventario":lista_inventario, "mensaje":mensaje}
+        context={"inventario":lista_inventario}
         return render(request,'venta/inventario/inventario_list.html',context)
 
 
@@ -172,6 +176,7 @@ def actualizar_inventario(request):
         #rescatamos en variables los valores del formulario (name)
         Id_juego = request.POST["Id_juego"]
         categoria = request.POST["categoria"]
+        imagen = request.POST["imagen"]
         plataforma = request.POST["plataforma"]
         coleccion = request.POST["coleccion"]
         nombre_juego = request.POST["nombre_juego"]
@@ -190,15 +195,17 @@ def actualizar_inventario(request):
         objInventario.Id_plataforma = objPlataforma
         objInventario.Id_coleccion  = objColeccion
         objInventario.nombre_juego  = nombre_juego
+        objInventario.imagen        = imagen
         objInventario.valor         = valor
         objInventario.stock         = stock
-        objInventario.disponible    = disponible
+        objInventario.disponible    = 1
          
         objInventario.save() #update en la base de datos
         lista_categoria = Categoria.objects.all()
         lista_plataforma = Plataforma.objects.all()
         lista_colecciones = Coleccion.objects.all()
-        context = {"mensaje":"Se guardó el juego al inventario","plataforma":lista_plataforma, "categoria":lista_categoria, "coleccion":lista_colecciones}
+        messages.success(request,"Modificado correctamente")
+        context = {"plataforma":lista_plataforma, "categoria":lista_categoria, "coleccion":lista_colecciones}
         return render(request,'venta/inventario/inventario_edit.html',context)
     else:
         lista_Inventario = Inventario.objects.all()
@@ -227,8 +234,9 @@ def agregar_plataformas(request):
         form = PlataformaForm(request.POST)
         if form.is_valid:
             form.save() #insert
+            messages.success(request,"Agregado correctamente")
             form = PlataformaForm()
-            context = {"mensaje": "Se grabo la plataforma", "form": form}
+            context = {"form": form}
             return render(request,'venta/plataforma/plataforma_add.html',context)
             
     else:
@@ -246,11 +254,13 @@ def borrar_plataformas(request,pk):
         #Aqui hay que llamar a otra funcion de python que sea una confirmación de lo que borramos.
         if plataforma:
             plataforma.delete() #Delete en la BD
-            context={"mensaje": "Plataforma eliminada", "plataformas": lista_plataformas, "errores": errores,}
+            messages.success(request,"Eliminado correctamente")
+            context={"plataformas": lista_plataformas, "errores": errores,}
             return render(request,'venta/plataforma/plataforma_list.html',context)
     except:
         lista_plataformas = Plataforma.objects.all()
-        context={"mensaje":"No existe la plataforma", "plataformas": lista_plataformas, "errores": errores,}
+        messages.error(request,"No se pudo eliminar")
+        context={"plataformas": lista_plataformas, "errores": errores,}
         return render(request,'venta/plataforma/plataforma_list.html',context)
 
 #modificar plataformas
@@ -265,7 +275,8 @@ def actualizar_plataforma(request, pk):
                 print("edit,es un post")
                 form = PlataformaForm(request.POST,instance=plataforma)
                 form.save()
-                context = {"mensaje": "Se actualizó la plataforma", "form":form, "plataforma":plataforma}
+                messages.success(request,"Modificado correctamente")
+                context = {"form":form, "plataforma":plataforma}
                 return render(request, 'venta/plataforma/plataforma_edit.html', context)
             else:
                 form = PlataformaForm(instance=plataforma)
@@ -273,9 +284,9 @@ def actualizar_plataforma(request, pk):
                 context = {"mensaje": mensaje, "form":form, "plataforma":plataforma}
                 return render(request, 'venta/plataforma/plataforma_edit.html', context)
     except:
-        mensaje = "No existe la plataforma"
+        messages.success(request,"No se pudo modificar")
         lista_plataformas = Plataforma.objects.all()
-        context = {"mensaje": mensaje, "form":form, "plataforma":lista_plataformas}
+        context = {"form":form, "plataforma":lista_plataformas}
         return render(request, 'venta/plataforma/plataforma_list.html', context)
 
 
@@ -293,8 +304,9 @@ def agregar_categorias(request):
         form = CategoriaForm(request.POST)
         if form.is_valid:
             form.save() #insert
+            messages.success(request,"Agregado correctamente")
             form = CategoriaForm()
-            context = {"mensaje": "Se grabo la categoria", "form": form}
+            context = {"form": form}
             return render(request,'venta/categoria/categoria_add.html',context)
             
     else:
@@ -312,11 +324,13 @@ def borrar_categorias(request,pk):
         #Aqui hay que llamar a otra funcion de python que sea una confirmación de lo que borramos.
         if categoria:
             categoria.delete() #Delete en la BD
-            context={"mensaje": "Categoria eliminada", "categorias": lista_categorias, "errores": errores,}
+            messages.success(request,"Borrado correctamente")
+            context={"categorias": lista_categorias, "errores": errores,}
             return render(request,'venta/categoria/categoria_list.html',context)
     except:
         lista_categorias = Categoria.objects.all()
-        context={"mensaje":"No existe la categoria", "categorias": lista_categorias, "errores": errores,}
+        messages.error(request,"No se pudo borrar")
+        context={"categorias": lista_categorias, "errores": errores,}
         return render(request,'venta/categoria/categoria_list.html',context)
 
 #modificar categorias
@@ -331,7 +345,8 @@ def actualizar_categoria(request, pk):
                 print("edit,es un post")
                 form = CategoriaForm(request.POST,instance=categoria)
                 form.save()
-                context = {"mensaje": "Se actualizó la categoria", "form":form, "categoria":categoria}
+                messages.success(request,"Modificado correctamente")
+                context = {"form":form, "categoria":categoria}
                 return render(request,'venta/categoria/categoria_edit.html',context)
             else:
                 form = CategoriaForm(instance=categoria)
@@ -339,9 +354,9 @@ def actualizar_categoria(request, pk):
                 context = {"mensaje": mensaje, "form":form, "categoria":categoria}
                 return render(request, 'venta/categoria/categoria_edit.html', context)
     except:
-        mensaje = "No existe la categoria"
+        messages.error(request,"No se pudo modificar")
         lista_categorias = Categoria.objects.all()
-        context = {"mensaje": mensaje, "form":form, "categoria":lista_categorias}
+        context = {"form":form, "categoria":lista_categorias}
         return render(request, 'venta/categoria/categoria_list.html', context)
 
 
@@ -360,8 +375,9 @@ def agregar_colecciones(request):
         form = ColeccionForm(request.POST)
         if form.is_valid:
             form.save() #insert
+            messages.success(request,"Agregado correctamente")
             form = ColeccionForm()
-            context = {"mensaje": "Se grabo la coleccion", "form": form}
+            context = {"form": form}
             return render(request,'venta/colecciones/colecciones_add.html',context)
             
     else:
@@ -379,11 +395,13 @@ def borrar_colecciones(request,pk):
         #Aqui hay que llamar a otra funcion de python que sea una confirmación de lo que borramos.
         if coleccion:
             coleccion.delete() #Delete en la BD
-            context={"mensaje": "Coleccion eliminada", "colecciones": lista_colecciones, "errores": errores,}
+            messages.success(request,"Eliminado Correctamente")
+            context={"colecciones": lista_colecciones, "errores": errores,}
             return render(request,'venta/colecciones/colecciones_list.html',context)
     except:
         lista_colecciones = Coleccion.objects.all()
-        context={"mensaje":"No existe la coleccion", "colecciones": lista_colecciones, "errores": errores,}
+        messages.error(request,"No se pudo eliminar")
+        context={"colecciones": lista_colecciones, "errores": errores,}
         return render(request,'venta/colecciones/colecciones_list.html',context)
 
 #modificar colecciones
@@ -398,7 +416,8 @@ def actualizar_colecciones(request, pk):
                 print("edit,es un post")
                 form = ColeccionForm(request.POST,instance=coleccion)
                 form.save()
-                context = {"mensaje": "Se actualizó la coleccion", "form":form, "coleccion":coleccion}
+                messages.success(request,"Modificado correctamente")
+                context = {"form":form, "coleccion":coleccion}
                 return render(request,'venta/colecciones/colecciones_edit.html',context)
             else:
                 form = ColeccionForm(instance=coleccion)
@@ -406,9 +425,9 @@ def actualizar_colecciones(request, pk):
                 context = {"mensaje": mensaje, "form":form, "coleccion":coleccion}
                 return render(request, 'venta/colecciones/colecciones_edit.html', context)
     except:
-        mensaje = "No existe la coleccion"
+        messages.error(request,"No se pudo modificar")
         lista_colecciones = Coleccion.objects.all()
-        context = {"mensaje": mensaje, "form":form, "coleccion":lista_colecciones}
+        context = {"form":form, "coleccion":lista_colecciones}
         return render(request, 'venta/colecciones/colecciones_list.html', context)
 
 

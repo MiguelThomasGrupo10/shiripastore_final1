@@ -12,104 +12,138 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
   <title>Shiripa Store | Inicio</title>
 </head>
+
 <body>
-    <section class="principal">
-      <div class="menu">
-        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="../index"><img class="logo" src="{% static 'IMG/Logo_Borde_Azul.png' %}"
-                alt="logo" /></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="../index">Inicio</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../tienda">Tienda</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../nosotros">Sobre nosotros</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../../contacto">Contacto</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../carrito">
-                    <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../../micuenta">
-                    <i class="fa-solid fa-user fa-lg"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+  <section class="principal">
+    <div class="menu">
+      <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index"><img class="logo" src="{% static 'IMG/Logo_Borde_Azul.png' %}"
+              alt="logo" /></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="../index">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../tienda">Tienda</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../nosotros">Sobre nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../../contacto">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../carrito">
+                  <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                </a>
+              </li>
+
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../administrador">@{{ user.username }}</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-user fa-lg"></i></a>
+              </li>
+              {% endif %}
+            </ul>
           </div>
-        </nav>
-      </div>
-
-      <!--CREACIÓN AGREGAR INVENTARIO-->
-      <!--CREACIÓN AGREGAR INVENTARIO-->
-
-<section class="container">
-    <h3>Agregar Inventario</h3>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <pre>Nombre del Juego: <input type="text" name="nombre_juego"> </pre>
-        <pre>Categoria: <select name="categoria">
-            {% for tmp in categorias %}
-            <option value="{{tmp.Id_categoria}}">{{tmp.categoria}}</option>
-            {% endfor %}
-        </select>
-        </pre>
-        <pre>Plataforma: <select name="plataforma">
-                {% for tmp in plataformas %}
-                  <option value="{{tmp.Id_plataforma}}">{{tmp.plataforma}}</option>
-                {% endfor %}
-              </select>
-              </pre>
-        <pre>Coleccion: <select name="coleccion">
-                {% for tmp in colecciones %}
-                  <option value="{{tmp.Id_coleccion}}">{{tmp.coleccion}}</option>
-                  {% endfor %}
-                </select>
-              </pre>
-        <pre>Valor: <input type="number" name="valor"> </pre>
-        <pre>Stock: <input type="number" name="stock"> </pre>
-        <input type="submit" class="btn btn-primary" value="Agregar">
-    </form>
-    <br><br>
-    <div id="idMensajes">
-        {% if mensaje %}
-        {{mensaje}}
-        {% endif %}
+        </div>
+      </nav>
     </div>
-    <br>
-    <a class="btn btn-outline-primary" href="{% url 'crud_inventario' %}">Volver</a>
-</section>
+  </section>
+  <!--CREACIÓN AGREGAR INVENTARIO-->
+  <!--CREACIÓN AGREGAR INVENTARIO-->
+  <section class="container mt-5 py-5">
+    <div class="row">
+      <div class="col-12 col-md-6 offset-md-3" style="padding-bottom: 10vh;">
+        <div class="card shadow">
+          <div class="card-body">
+            <br>
+            <h3>Agregar Inventario</h3>
+            <hr>
+            <form action="" method="POST">
+              {% csrf_token %}
+              <pre class="form-label">Nombre del Juego: <input type="text" name="nombre_juego" class="form-control"> </pre>
 
-<div class="">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 border-top">
-    <p class="col-md-4 mb-0 ps-3 fs-6 text-white">© 2023 Shiripa Store</p>
+              <pre class="input-group-text">Imagen del juego: <input type="file" class="form-control" name="imagen"></pre>
 
-    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto"><img
-      class="logo"
-      src="{% static 'IMG/Logo_Borde_Azul.png' %}"
-      alt="logo"/> 
-    </a>
+              <pre>Categoria: <select class="form-select" name="categoria">
+                    {% for tmp in categorias %}
+                    <option value="{{tmp.Id_categoria}}">{{tmp.categoria}}</option>
+                    {% endfor %}
+                </select>
+                </pre>
+              <pre>Plataforma: <select class="form-select" name="plataforma">
+                        {% for tmp in plataformas %}
+                          <option value="{{tmp.Id_plataforma}}">{{tmp.plataforma}}</option>
+                        {% endfor %}
+                      </select>
+                      </pre>
+              <pre>Coleccion: <select class= "form-select" name="coleccion">
+                        {% for tmp in colecciones %}
+                          <option value="{{tmp.Id_coleccion}}">{{tmp.coleccion}}</option>
+                          {% endfor %}
+                        </select>
+                      </pre>
+              <pre>Valor: <input type="number" name="valor" class="form-control"> </pre>
+              <pre>Stock: <input type="number" name="stock" class="form-control"> </pre>
+              <div class="d-md-flex justify-content-end">
+              <input type="submit" class="btn btn-primary" value="Agregar">
+            </div>
+            </form>
+            <br>
+            <!-- Script de Sweet Alerts -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <div id="idMensajes">
+              {% if messages %}
+              {% for m in messages %}
+                <script>
+                Swal.fire({
+                  "title": "Felicitaciones",
+                  "text": "{{m}}",
+                  "icon":"success"
+                })
+                </script>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <!-- Fin de Script de Sweet Alerts -->
+            <br>
+            <a class="btn btn-outline-primary" href="{% url 'crud_inventario' %}">Volver</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
 
-    <ul class="nav col-md-4 justify-content-end navbar-dark">
-      <li class="nav-item"><a href="../index" class="nav-link px-2 fs-6 footerlink">Inicio</a></li>
-      <li class="nav-item"><a href="../tienda" class="nav-link px-2 fs-6 footerlink">Tienda</a></li>
-      <li class="nav-item"><a href="../nosotros" class="nav-link px-2 fs-6 footerlink">Sobre nosotros</a></li>
-      <li class="nav-item"><a href="../../../contacto" class="nav-link px-2 fs-6  footerlink">Contacto</a></li>
-    </ul>
-  </footer>
-</div>
+
+  <div class="">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 border-top">
+      <p class="col-md-4 mb-0 ps-3 fs-6 text-white">© 2023 Shiripa Store</p>
+
+      <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto"><img
+          class="logo" src="{% static 'IMG/Logo_Borde_Azul.png' %}" alt="logo" />
+      </a>
+
+      <ul class="nav col-md-4 justify-content-end navbar-dark">
+        <li class="nav-item"><a href="../index" class="nav-link px-2 fs-6 footerlink">Inicio</a></li>
+        <li class="nav-item"><a href="../tienda" class="nav-link px-2 fs-6 footerlink">Tienda</a></li>
+        <li class="nav-item"><a href="../nosotros" class="nav-link px-2 fs-6 footerlink">Sobre nosotros</a></li>
+        <li class="nav-item"><a href="../../../contacto" class="nav-link px-2 fs-6  footerlink">Contacto</a></li>
+      </ul>
+    </footer>
+  </div>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

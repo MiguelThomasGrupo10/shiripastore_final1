@@ -9,10 +9,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <script
-      src="https://kit.fontawesome.com/9598d0e898.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/9598d0e898.js" crossorigin="anonymous"></script>
     {% load static %}
     <link
       rel="stylesheet"
@@ -59,11 +56,25 @@
                     <i class="fa-solid fa-cart-shopping fa-lg"></i>
                   </a>
                 </li>
+
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="../../../micuenta">
-                    <i class="fa-solid fa-user fa-lg"></i>
-                  </a>
+                  <a class="nav-link" href="{% url 'logout' %}"
+                    >Cerrar sesión</a
+                  >
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../administrador"
+                    >@{{ user.username }}</a
+                  >
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}"
+                    ><i class="fa-solid fa-user fa-lg"></i
+                  ></a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
@@ -71,41 +82,50 @@
       </div>
     </section>
 
-    <section class="container mt-4">
-      <h3 class="mb-3">Bienvenido | {{ user.username }}</h3>
+    <section class="container mt-4 ">
+      <h3 class="mb-3 mt-5 display-4 text-center" style="padding-bottom: 10vh;">Bienvenido | {{ user.username }} </h3>
+      <br> <br> <br>
       <div class="row">
         {% if user.username == "admin" %}
-        <div class="col-md-3 mb-3">
-          <a
-            href="{% url 'crud_plataformas' %}"
-            class="btn btn-primary btn-lg btn-block"
-            >Lista de Plataformas</a
-          >
+        <div class="col">
+          <div class="card align-items-center border-light cartas" style="font-size: 5vh;">
+            <a href="{% url 'crud_plataformas' %}" class="text-center"><i class="fa-sharp fa-solid fa-layer-group fa-2xl"></i></a>
+            <hr>
+            <div class="card-body">
+              <h4 class="card-title">Plataformas</h4>
+            </div>
+          </div>
         </div>
         {% endif %} {% if user.username == "admin" %}
-        <div class="col-md-3 mb-3">
-          <a
-            href="{% url 'crud_categorias' %}"
-            class="btn btn-primary btn-lg btn-block"
-            >Lista de Categorias</a
-          >
+        <div class="col">
+          <div class="card align-items-center border-light cartas" style="font-size: 5vh;">
+            <a href="{% url 'crud_categorias' %}" class="text-center"><i class="fa-sharp fa-solid fa-list fa-2xl"></i></a>
+            <hr>
+            <div class="card-body">
+              <h4 class="card-title">Categorias</h4>
+            </div>
+          </div>
         </div>
         {% endif %} {% if user.username == "admin" %}
-        <div class="col-md-3 mb-3">
-          <a
-            href="{% url 'crud_colecciones' %}"
-            class="btn btn-primary btn-lg btn-block"
-            >Lista de Colecciones</a
-          >
+        <div class="col">
+          <div class="card align-items-center border-light cartas" style="font-size: 5vh; padding-bottom: 20vh;" >
+            <a href="{% url 'crud_colecciones' %}" class="text-center"><i class="fa-solid fa-notes-medical fa-2xl"></i></a>
+            <hr>
+            <div class="card-body">
+              <h4 class="card-title">Colecciones</h4>
+            </div>
+          </div>
         </div>
         {% endif %}
 
-        <div class="col-md-3 mb-3">
-          <a
-            href="{% url 'crud_inventario' %}"
-            class="btn btn-primary btn-lg btn-block"
-            >Lista de Inventarios</a
-          >
+        <div class="col">
+          <div class="card align-items-center border-light cartas" style="font-size: 5vh;">
+            <a href="{% url 'crud_inventario' %}" class="text-center"><i class="fa-sharp fa-solid fa-boxes-stacked fa-2xl"></i></a>
+            <hr>
+            <div class="card-body">
+              <h4 class="card-title">Inventario</h4>
+            </div>
+          </div>
         </div>
       </div>
     </section>

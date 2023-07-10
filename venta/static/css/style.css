@@ -23,6 +23,8 @@
   width: 5vh;
 }
 
+
+
 #carrusel {
   margin-top: 10vh;
 }
@@ -58,8 +60,14 @@ footer {
   background-color: #4d8bee;
   margin-left: 0;
   margin-right: 0;
+  bottom: 0px;
+
 }
 
+
+.pruebadefooter{
+  bottom: 0px;
+}
 .imagendefondo {
   background-image: url(../IMG/Fondo_Shiripa.png);
 }

@@ -60,11 +60,25 @@
                     <i class="fa-solid fa-cart-shopping fa-lg"></i>
                   </a>
                 </li>
+
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="../../../micuenta">
-                    <i class="fa-solid fa-user fa-lg"></i>
-                  </a>
+                  <a class="nav-link" href="{% url 'logout' %}"
+                    >Cerrar sesión</a
+                  >
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../administrador"
+                    >@{{ user.username }}</a
+                  >
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}"
+                    ><i class="fa-solid fa-user fa-lg"></i
+                  ></a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
@@ -111,14 +125,14 @@
                   <h5 class="card-title">{{tmp.nombre_juego}}</h5>
                   <p class="card-text">{{tmp.Id_categoria}}</p>
                   <p class="card-text">${{tmp.valor}}</p>
-                  <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                  <a href="{% url 'tiendaAdd' inventario_id=tmp.Id_juego %}" class="btn btn-primary">Agregar al carrito</a>
                 </div>
               </div>
             </div>
           {% endfor %}
           {% endif %}
         </div> 
-        <hr>
+        
     </section>
 
     <div class="">

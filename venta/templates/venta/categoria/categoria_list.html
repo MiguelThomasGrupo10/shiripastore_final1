@@ -60,16 +60,30 @@
                     <i class="fa-solid fa-cart-shopping fa-lg"></i>
                   </a>
                 </li>
+
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="../../../micuenta">
-                    <i class="fa-solid fa-user fa-lg"></i>
-                  </a>
+                  <a class="nav-link" href="{% url 'logout' %}"
+                    >Cerrar sesión</a
+                  >
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../administrador"
+                    >@{{ user.username }}</a
+                  >
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}"
+                    ><i class="fa-solid fa-user fa-lg"></i
+                  ></a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
         </nav>
-      </div>
+      </div> 
     </section>
     <br />
     <br />
@@ -123,6 +137,23 @@
       >
       <br />
     </section>
+
+    <!-- Script de Sweet Alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div id="idMensajes">
+      {% if messages %}
+      {% for m in messages %}
+        <script>
+        Swal.fire({
+          "title": "Felicitaciones",
+          "text": "{{m}}",
+          "icon":"success"
+        })
+        </script>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <!-- Fin de Script de Sweet Alerts -->
 
     <div class="">
       <footer
